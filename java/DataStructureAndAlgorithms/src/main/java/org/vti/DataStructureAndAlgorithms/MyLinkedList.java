@@ -3,89 +3,114 @@ package org.vti.DataStructureAndAlgorithms;
 public class MyLinkedList {
 	private int size;
 	private Node head;
-	
-	
+
 	public MyLinkedList() {
 	}
-	
-	
+
 	public int getSize() {
 		return this.size;
 	}
-	
+
 	public Node getHead() {
 		return head;
 	}
-
 
 	public void setHead(Node head) {
 		this.head = head;
 	}
 
-
 	public void setSize(int size) {
 		this.size = size;
 	}
 
-
 	public void append(int d) {
 		Node newNode = new Node(d);
-		if(head == null) {
+		if (head == null) {
 			head = newNode;
 			size++;
 			return;
 		}
 		Node i = head;
-		while(i.getNext() != null)
+		while (i.getNext() != null)
 			i = i.getNext();
-		
+
 		i.setNext(newNode);
-		
+
 		size++;
 	}
-	
+
 	public void append(Node newNode) {
-		if(head == null) {
+		if (head == null) {
 			head = newNode;
 			size++;
 			return;
 		}
 		Node i = head;
-		while(i.getNext() != null)
+		while (i.getNext() != null)
 			i = i.getNext();
-		
+
 		i.setNext(newNode);
-		
+
 		size++;
 	}
-	
+
 	public void print() {
 		Node i = head;
-		while(i != null) {
+		while (i != null) {
 			System.out.println(i.getData());
 			i = i.getNext();
 		}
-			
+
+	}
+
+	public Node reserveListRecursive(Node node) {
+		if (node == null)
+			return null;
+
+		Node next = reserveListRecursive(node.getNext());
+		if (next == null)
+			this.head = node;
+		else
+			next.setNext(node);
+
+		node.setNext(null);
+		return node;
 	}
 	
+	public void reserveListIterative(Node node) {
+		Node preNode = null;
+		Node currNode = head;
+		
+		while(currNode != null) {
+			Node nextNode = currNode.getNext();
+						
+			currNode.setNext(preNode);
+			preNode = currNode;
+			
+			if(nextNode == null) 
+				head = currNode;
+			
+			currNode = nextNode;
+		}
+		
+	}
+
 	public void print1() {
 		print(head);
-			
+
 	}
-	
+
 	public void print(Node curr) {
-		
-		if(curr == null)
+
+		if (curr == null)
 			return;
-		
+
 		System.out.println(curr.getData());
-		
+
 		print(curr.getNext());
 	}
-	
-	
-	
-	public static class Node{
+
+	public static class Node {
 		private int data;
 		private Node next;
 
@@ -104,7 +129,7 @@ public class MyLinkedList {
 		public void setNext(Node next) {
 			this.next = next;
 		}
-		
+
 		public Node(int d) {
 			this.data = d;
 		}
@@ -114,7 +139,6 @@ public class MyLinkedList {
 			this.data = data;
 			this.next = next;
 		}
-		
-		
+
 	}
 }

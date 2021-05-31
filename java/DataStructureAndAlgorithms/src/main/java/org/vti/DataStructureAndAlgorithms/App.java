@@ -32,6 +32,9 @@ public class App
     	l.append(1);
     	l.append(2);
     	l.append(3);
+    	l.append(4);
+//    	l.reserveListRecursive(l.getHead());
+    	l.reserveListIterative(l.getHead());
     	l.print1();
     }
 }
