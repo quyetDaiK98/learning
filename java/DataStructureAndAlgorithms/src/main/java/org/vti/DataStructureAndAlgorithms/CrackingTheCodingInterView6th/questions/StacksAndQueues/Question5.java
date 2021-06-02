@@ -10,15 +10,34 @@ public class Question5 {
 		
 		while (!primary.isEmpty()) {
 			int currItem = primary.peek();
-			while (tempority.peek() < currItem)
+			while (tempority.peek() < currItem) 
 				primary.push(tempority.pop());
+			
+			tempority.push(currItem);
 			
 			while (primary.peek() != currItem) {
 				tempority.push(primary.pop());
 			}
-			tempority.push(primary.pop());
+			
+			primary.pop();
 		}
 		return tempority;
+	}
+	
+	public static void sort1(Stack<Integer> primary) {
+		Stack<Integer> tempority = new Stack<Integer>();
+		
+		while(!primary.isEmpty()) {
+			int tmp = primary.pop();
+			while(!tempority.isEmpty() && tempority.peek() > tmp) {
+				primary.push(tempority.pop());
+			}
+			tempority.push(tmp);
+		}
+		
+		while(!tempority.isEmpty()) {
+			primary.push(tempority.pop());
+		}
 	}
 
 	public static void main(String[] args) {
@@ -31,6 +50,8 @@ public class Question5 {
 		primary.add(3);
 		primary.add(8);
 		
-		System.out.println(sort(primary));
+//		System.out.println(sort(primary));
+		sort1(primary);
+		System.out.println(primary);
 	}
 }
