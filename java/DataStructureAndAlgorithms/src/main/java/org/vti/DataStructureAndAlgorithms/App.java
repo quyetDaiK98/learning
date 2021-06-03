@@ -36,5 +36,16 @@ public class App
 //    	l.reserveListRecursive(l.getHead());
     	l.reserveListIterative(l.getHead());
     	l.print1();
+    	
+    	MyBST bst = new MyBST();
+    	bst.insert(1, bst.root);
+    	bst.insert(2, bst.root);
+//    	bst.insert(3, bst.root);
+//    	bst.insert(4, bst.root);
+//    	bst.insert(5, bst.root);
+//    	bst.insert(6, bst.root);
+//    	bst.insert(7, bst.root);
+    	
+    	bst.inOrderTravesal(bst.root);
     }
 }
