@@ -38,14 +38,15 @@ public class App
     	l.print1();
     	
     	MyBST bst = new MyBST();
-    	bst.insert(1, bst.root);
-    	bst.insert(2, bst.root);
-//    	bst.insert(3, bst.root);
-//    	bst.insert(4, bst.root);
-//    	bst.insert(5, bst.root);
-//    	bst.insert(6, bst.root);
-//    	bst.insert(7, bst.root);
     	
-    	bst.inOrderTravesal(bst.root);
+    	bst.insert(4);
+    	bst.insert(1);
+    	bst.insert(2);
+    	bst.insert(3);
+    	bst.insert(5);
+    	bst.insert(6);
+    	bst.insert(7);
+    	
+    	bst.breadthFirstTravesal();
     }
 }
