@@ -1,0 +1,251 @@
+database -> index
+table -> type
+row -> document
+column -> field
+
+dare to dream (book)
+rich dad poor dad (book)
+----> yellowcodebook
+----> howtodoinjava
+
+Lý Thuyết Tài Chính Tiền Tệ Lê Văn Tề pdf
+Bước Đi Ngẫu Nhiên Trên Phố Wall
+
+https://tinhte.vn/thread/lieu-choi-chung-khoan-voi-zero-kinh-nghiem-va-cai-ket-ban.3327096/
+
+https://cafebiz.vn/nhung-lan-khoi-nghiep-cua-ty-phu-pham-nhat-vuong-tu-thoi-du-hoc-da-buon-ao-gio-lam-mi-tom-tuoi-50-don-luc-san-xuat-o-to-vuon-ra-the-gioi-20210309171046316.chn
+https://cafebiz.vn/anh-hung-tham-lang-cua-nuoc-my-trong-dai-dich-covid-19-la-mot-nha-khoa-hoc-du-lieu-moi-26-tuoi-20210314080653591.chn
+
+svn://172.23.139.187/news/branches/089_20210125
+
+8679723564
+
+Check port: sudo lsof -i -P -n | grep LISTEN
+service --status -all
+
+Check size : sudo du -sh /var  |  sudo du -shc /var/*
+
+
+https://mocato.vn/products/hop-com-dien-2-tang-mocato-m601
+
+- Elasticsearch uses a data structure called an inverted index that supports very fast full-text searches.
+- An inverted index lists every unique word that appears in any document and identifies all of the documents each word occurs in.
+
+- document trong 1 index được phân tán qua nhiều primary shard
+- As the cluster grows (or shrinks), Elasticsearch automatically migrates shards to rebalance the cluster.
+- Each document in an index belongs to one primary shard. A replica shard is a copy of a primary shard.
+- Replicas provide redundant copies of your data to protect against hardware failure and increase capacity to serve read requests like searching or retrieving a document
+- The number of primary shards in an index is fixed at the time that an index is created, but the number of replica shards can be changed at any time, without interrupting indexing or query operations.
+
+
+- You can index strings to both 'text' and 'keyword' field type. However, 'text' field values are analyzed for full-text search while 'keyword' strings are for filtering and sorting.
+- Default type of a document in index is '_doc'.
+
+- What you usually do is index documents and get them back by querying. What the percolator allows you to do is index your query 
+and percolate documents against the indexed queries to know which queries they match.
+
+
+- An 'analyzer' is just a package which contains three lower-level building blocks: character filters, tokenizers, and token filters :
+	+ character filters :
+		*A character filter receives the original text as a stream of characters and can transform the stream by adding, removing, or changing characters. For instance, a character filter could be used to convert Hindu-Arabic numerals (٠‎١٢٣٤٥٦٧٨‎٩‎) into their Arabic-Latin equivalents (0123456789), or to strip HTML elements like <b> from the stream.
+
+                *An analyzer may have zero or more character filters.
+
+	+ tokenizers :
+		*A tokenizer receives a stream of characters, breaks it up into individual tokens (usually individual words), and outputs a stream of tokens. For instance, a whitespace tokenizer breaks text into tokens whenever it sees any whitespace. It would convert the text "Quick brown fox!" into the terms [Quick, brown, fox!].
+
+                *An analyzer must have exactly one tokenizer.
+
+	+ token filters :
+		*A token filter receives the token stream and may add, remove, or change tokens. For example, a lowercase token filter converts all tokens to lowercase, a stop token filter removes common words (stop words) like the from the token stream, and a synonym token filter introduces synonyms into the token stream.
+
+		*Token filters are not allowed to change the position or character offsets of each token.
+
+                *An analyzer may have zero or more token filters.
+
+	
+It is always recommended to define an alias for your index, so that in case of a reindex systems / applications don’t need to be changed to know that the percolator queries are now in a different index.
+
+
+Query context -> A query clause used in query context answers the question “How well does this document match this query clause?” Besides deciding whether or not the document matches, the query clause also calculates a _score representing how well the document matches, relative to other documents.
+
+Filter context -> In filter context, a query clause answers the question “Does this document match this query clause?” The answer is a simple Yes or No — no scores are calculated. Filter context is mostly used for filtering structured data, e.g.
+
+{
+  "query": {
+    "bool": {
+      "should": [{
+        "bool": {
+          "must": [{
+            "match": {
+              "preference_1": "Apples"
+            }
+          }, {
+            "match": {
+              "preference_2": "Bananas"
+            }
+          }]
+        }
+      }, {
+        "bool": {											
+          "must": [{
+            "match": {
+              "preference_1": "Apples"
+            }								========>(preference_1 = Apples AND preference_2=Bananas) OR (preference_1 = Apples AND preference_2 = Cherries) OR preference_1 = Grapefruits
+          }, {								========>filter by grade = 2
+            "match": {
+              "preference_2": "Cherries"
+            }
+          }]
+        }
+      }, {
+        "match": {
+          "preference_1": "Grapefruit"
+        }
+      }]
+    }
+  },
+      "filter" : {
+        "term": {
+         "grade": "2"
+        }
+      }
+}
+
+
+
+Letter	Date or Time Component	Presentation	Examples
+G	Era designator	Text	AD
+y	Year	Year	1996; 96
+Y	Week year	Year	2009; 09
+M	Month in year	Month	July; Jul; 07
+w	Week in year	Number	27
+W	Week in month	Number	2
+D	Day in year	Number	189
+d	Day in month	Number	10
+F	Day of week in month	Number	2
+E	Day name in week	Text	Tuesday; Tue
+u	Day number of week (1 = Monday, ..., 7 = Sunday)	Number	1
+a	Am/pm marker	Text	PM
+H	Hour in day (0-23)	Number	0
+k	Hour in day (1-24)	Number	24
+K	Hour in am/pm (0-11)	Number	0
+h	Hour in am/pm (1-12)	Number	12
+m	Minute in hour	Number	30
+s	Second in minute	Number	55
+S	Millisecond	Number	978
+z	Time zone	General time zone	Pacific Standard Time; PST; GMT-08:00
+Z	Time zone	RFC 822 time zone	-0800
+X	Time zone	ISO 8601 time zone	-08; -0800; -08:00
+
+
+Microsoft Certified Azure Data Scientist Associate
+
+
+
+
+https://www.kaggle.com/learn/overview
+hands-on machine learning with scikit-learn and tensorflow 2nd edition pdf
+
+https://www.quora.com/q/techiedelight/500-Data-Structures-and-Algorithms-interview-questions-and-their-solutions?utm_source=j2team&utm_medium=url_shortener
+
+
+
+
+
+
+
+https://tinhte.vn/thread/hieu-cac-ky-hieu-tren-nhan-dan-quan-ao-de-giat-va-bao-quan-tot-hon.3238239/
+https://tinhte.vn/thread/kinh-sieu-nhe-chan-anh-sang-xanh-ophtus-zero-giam-40-toan-shop-doc-pass-tinhte-giam-them-100k.3224004/
+
+
+After updating pg_hba.conf or postgresql.conf, the server needs the config needs to be reloaded. The easiest way to do this is by restarting the postgres service:
+
+service postgresql restart
+When the service command is not available (no upstart on Synology NAS, for example), there are some more creative ways to reload the config. Note this first one needs to be done under the user that runs postgres (usually the user=postgres).
+
+user#  sudo su postgres
+postgres#  pg_ctl reload
+If it complains about not having a data directory, you'll have to do it from within PostgreSQL itself.
+
+psql -U postgres
+postgres=> SELECT pg_reload_conf();
+If that doesn't work (like modiying the listening addresses or ports) then you may just have to restart the machine. If it doesn't autostart, start the postgresql service/process.
+
+
+KỶ LUẬT CAO NHẤT CỦA NGƯỜI TRƯỞNG THÀNH: BAN NGÀY KIẾM THÊM NHIỀU TIỀN, BAN ĐÊM ĐỌC THÊM NHIỀU SÁCH
+Tại sao có nhiều người làm càng nhiều càng chẳng được nhiêu, trong khi có nhiều người làm ít mà hưởng nhiều?
+Bởi vì những người ở vế sau không chịu gánh nặng về tiền, hay nói đúng hơn, họ nắm "thu nhập chìm" trong tay.
+"Thu nhập chìm" nghĩa là những khoản đầu tư sinh lời mà bạn không thấy được, nhưng nó vẫn gia tăng từng ngày.
+Những người như vậy, khi xin nghỉ việc ở nhà sinh con, tiền tự tăng!
+Khi đi du lịch với người thân yêu, tài khoản tự tăng!
+Khi gửi con đến trường Quốc tế học, không phải lo, ngân sách cá nhân cũng đang tăng...
+Số tiền họ chấp nhận bỏ ra đầu tư, số tiền mà bạn nhìn nhận là đã "mất đi", sẽ giúp họ kiếm lại gấp mấy lần, mấy chục lần... vào ngày mai. Đó là cách sống nhẹ nhàng, thông minh và chống rủi ro trong mọi thời điểm.
+1. Dùng tiền kiếm tiền, là cách nhanh nhất để tích lũy tài phú!
+Lý Gia Thành từng nói một câu rất nổi tiếng:
+"Trước 30 tuổi, mọi người đều dựa vào sức lực hoặc trí thông minh để kiếm tiền. Nhưng sau 30 tuổi, người ta dùng tiền kiếm tiền."
+Feng He, người sáng lập ra trường Kinh doanh Weimiao, đã dùng khoảng nợ 6 vạn tệ để đổi lấy "thu nhập chìm" hơn 1 triệu tệ như bây giờ chỉ trong vòng 3 năm.
+Feng He sinh ra ở nông thôn, bố mẹ đều là nông dân. Có thể nói, gia đình anh không phải là nguyên dân dẫn đến sự giàu có của anh sau này. Sau khi tốt nghiệp cấp ba, vì thành tích không cao, Feng He chỉ được nhận vào một trường cao đẳng hạng ba. Nhưng anh không chán ghét nó, mà trái lại còn mơ ước có ngày trở thành triệu phú.
+Tuy vậy, bởi vì từ nhỏ không nhận được nền giáo dục tốt, anh ta luôn nghĩ rằng: "Học hành là vô dụng." Nhớ có lần giáo viên tức giận hỏi anh:
+"Giờ em không lo học, tương lai lấy cái gì thay đổi vận mệnh?"
+Anh còn ngang nhiên trả lời: "Dùng tiền!"
+Nhưng một người không bối cảnh, không quan hệ, không học lực tốt như anh, dựa vào cái gì để kiếm ra tiền đây?
+Sau này, Feng He đã từng lên ý tưởng kinh doanh, nhưng chỉ sau 3 tháng, anh ta đã "thành công" phá sản công ty, còn nợ lại 6 vạn tệ.
+Sau thất bại đó, anh ta mới hoàn toàn tỉnh táo: Muốn kiếm tiền, bản thân phải thực sự có chút bản lĩnh đã.
+Thế nên, anh ta gác lại chuyện kinh doanh thất bại, bắt đầu tìm tòi, nghiên cứu trên thư viện. Đặc biệt đọc nhiều sách về cách người giàu kiếm tiền. Ví dụ như những cuốn sách viết về Lý Gia Thành, Sam Walton, Jack Welch, Buffett...
+Trong một cuốn sách của Buffett, anh ta tình cờ học được một khái niệm:
+"Một người có thể tích lũy được bao nhiêu của cải trong một đời không phụ thuộc vào số tiền bạn có thể kiếm được, mà phụ thuộc vào khả năng kiểm soát tiền bạc của bạn."
+Ghi nhớ kỹ những kỹ năng có thể sẽ phù hợp với bản thân sau này. Bởi vì không có tiền, Feng He chỉ đành làm nhân viên pha chế cho nhà hàng - một công việc được bao ăn bao ở.
+Trong lòng Feng He hiểu rõ, nếu an phận làm một người pha chế ở đây, vậy tương lai sẽ chẳng có cơ hội nào để thay đổi. Vì vậy, tất cả những công việc hiện tại đều chỉ là tạm thời. Để có thể nhanh chóng giàu có, anh ta đã học thêm cách kiếm tiền và quản lý tiền.
+Vì thị trường chứng khoán mở cửa vào ban ngày, anh ta đã xin làm ca đêm mỗi ngày, từ 5 giờ chiều đến 2 giờ sáng để có thời gian nghiên cứu về chứng khoán.
+Hơn nửa năm sau, Feng He đã lấy được tất cả các chứng chỉ cần thiết và nhận được giấy báo nhập học từ đại học Phúc Đán.
+2. Từ một "con nợ" trở thành "người giàu" trong mắt người khác.
+Dưới sự giới thiệu của một người bạn, Feng He đến công ty với tư cách là một nhà phân tích chứng khoán, công việc của anh là sàng lọc cổ phiếu có chất lượng cao.
+Sau 1 tháng, khả năng của anh được công nhận, thu nhập tương đương 8000 nhân dân tệ hiện nay. Nhưng khi đã quen việc, anh lại chọn nhảy việc. Để đạt được mục tiêu tích lũy nhiều tiền, anh ta tự mình lập một nhóm.
+Với nỗ lực của cả nhóm, họ đã biến lỗ thành lãi chỉ sau 3 tháng. Fu Sheng đã có thể tự tin nói rằng: "Tôi được tự do tài chính rồi."
+Nếu bạn muốn sống cuộc đời an nhàn, đủ ăn đủ xài, việc lựa chọn một công việc văn phòng ổn định và "chạy theo" nó, tích cực bỏ 30% - 50% số tiền lương mỗi tháng vào sổ tiết kiệm, đợi đến lúc nghỉ hưu sẽ có số tiền dưỡng già. Không sai!
+Nhưng nếu bạn muốn tự do tài chính, sống cuộc đời dư dả, sung túc, mua đồ không cần nhìn giá, vậy từ bây giờ hãy học cách quản lý tiền!
+Quản lý tiền bao gồm cả việc tiết kiệm chi tiêu, cách tiêu xài thích hợp, và cả cách dùng tiền đầu tư hợp lý.
+Bởi vì quản lý tài chính bao gồm cả việc đầu tư, kinh doanh, nên có nhiều người thường cho rằng tiền vốn đủ nhiều, mới có thể tự mình quản lý tài chính thành công. Nhưng khái niệm này sai rồi.
+Không phải vì bạn có tiền mới có thể quản lý tài chính, mà vì bạn biết cách quản lý tài chính, mới có tiền.
+Bạn biết không, vốn ban đầu của Warren Buffett là 114 đô la Mỹ. Nhưng những năm nay, thông qua việc dùng tiền kiếm tiền, ông ấy đã trở thành người giàu nhất thế giới.
+Ngay từ bây giờ, hãy tập quản lý tài chính bằng những việc đơn giản nhất:
+GIẢM CHI PHÍ THỪA: ghi rõ số tiền chi tiêu mỗi ngày vào một cuốn sổ, kiểm soát chặt chẽ tất cả các chi tiêu trong 1 tháng. Tập tiết kiệm, chỉ mua những thứ cần; tập từ bỏ, không mua chỉ vì thích hay đua theo trào lưu.
+ĐẦU TƯ CÁ NHÂN: Đầu tư 10% tiền lương hàng tháng vào bản thân, có thể là sức khỏe, kĩ năng, kiến thức, tùy bạn chọn thứ phù hợp với mình; làm việc chăm chỉ hơn để phát triển kỹ năng công việc.
+TĂNG THU NHẬP: Đặt ra một mức tiêu phí nhất định hằng tháng, phần còn dư ngoài việc đầu tư cá nhân, hãy dùng nó để đầu tư kinh doanh...
+____________________
+Theo: Trí Thức Trẻ
+1.1 Nội dung fix: 
+. Fix lỗi: [UAT] CLS・TPS của topicnotice và topicqoute đang khác hệ thống cũ
+  ref: https://redmine.vti.com.vn/issues/85260
+
+. Fix lỗi: [NEWS] Thống kê Message VoltDB trong source code
+  ref: https://redmine.vti.com.vn/issues/81977  
+   
+. Update lại task synonym theo spec mới
+  ref: https://redmine.vti.com.vn/issues/85586 
+
+2. Đường dẫn file jar,war, source code
+
+2.1 Link SVN source code
+
+svn://172.23.139.187/news/branches/088_20201012/NewsRenewal.VTI.20210317
+
+2.2 Export file jar,war và file config
+
+Path: \\YJHXDT01\Apricot\work\vti\VTI-Offshore\20.Release\20210317
+
+
+
+
+
+
+
+
+Long-89
+Dương-91
+Ba-91
+Hưng-94
+
+
+
